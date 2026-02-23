@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Smart Expense Tracker">
+    <meta name="keywords" content="expenses, tracking, smart, saving">
+    <meta name="author" content="Nikita Ghute">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style/style.css" rel="stylesheet">
+    <title>Smart Expense Tracker</title>
+    
+</head>
+  <body>
+    <div class="section_border">
+      <header>
+    <h1>💰 Smart Expense Tracker</h1>
+  </header>
+      
+    <!-- ===== Overview Section ===== -->
+      <section class="overview">
+    <div class="card">
+        <h3>Balance</h3>
+      <p id="balance">₹0</p>
+    </div>
+    <div class="card">
+      <h3>This Month</h3>
+      <p id="month_total">₹0</p>
+    </div>
+    <div class="card">
+        <h3>Transactions</h3>
+        <p id="count">0</p>
+    </div>
+  </section>
+
+<!-- ===== Add Transaction Form start here ===== -->
+<section class="form-section">
+    <h2>Add Transaction</h2>
+    <form id="transaction_form">
+        <input type="number" id="amount" placeholder="Amount" required />
+        <select id="type">
+          <option value="expense">Expense</option>
+         <option value="income">Income</option>
+      </select>
+      <select id="category">
+        <option>Food</option>
+        <option>Rent</option>
+        <option>Travel</option>
+        <option>Shopping</option>
+    </select>
+    <input type="date" id="date"  />
+    <input type="text" id="note" placeholder="Note" />
+      <button type="submit">+ Add Transaction</button>
+     </form> 
+   </section> 
+  
+  <!-- ===== Filter & Sort ===== -->
+  <section class="filters">
+    <!--commented below working code-->
+     <select id="filter_category">
+      <option value="all">All Categories</option>
+      <option>Food</option>
+      <option>Rent</option>
+      <option>Travel</option>
+      <option>Shopping</option>
+    </select>
+    
+    <select id="sort-by">
+      <option value="newest">Newest First</option>
+      <option value="oldest">Oldest First</option>
+      <option value="high">High Amount</option>
+      <option value="low">Low Amount</option>
+    </select> 
+    
+    <!-- <button id="ai-insights">💡 AI Insights</button> -->
+  </section>
+  
+  <!-- ===== Transaction List ===== -->
+  <section class="transactions">
+    <h2>Transactions</h2>
+    <ul id="expenseList">
+      <!-- JS will add <li> here -->
+    </ul>
+</section>
+</div>
+
+  <script src="js/index.js"></script>
+ </body>
+</html>

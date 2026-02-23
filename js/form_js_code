@@ -1,0 +1,165 @@
+//    <!-- array methods -->
+//  <div>
+//   <p id="demo">array</p>
+//  </div>
+
+// <!--form validation pactice-->
+// <!-- <form onsubmit="return validateForm()" action="./formSubmit.html">
+//     User Name:
+//     <input type="text" id="user_id" name="User name">
+//   <br><br>
+//     Contact No:
+//     <input type="text" id="telephone" name="Contact">
+//   <br><br>
+//     Email:
+//     <input type="email" id="email" name="Email">
+//   <br><br>
+//     <input type="submit" value="submit your data">
+//     </form> --></br>
+
+
+// // document.addEventListener('DOMLoaded',()=>{
+// //     console.log('DOM fully loaded and parsed');
+// //     const myForm = document.getElementById('myForm');
+// //     const nameData=document.getElementById('name');
+// //     const contactData=document.getElementById('num');
+// //     const nameError=document.getElementById("nameError");
+// //     const contactError=document.getElementById("contactError");
+
+// //     myForm.addEventListener("submit", (e)=>{
+// //         e.preventDefault();
+// //     nameError.innerText="";
+// //     contactError.innerText="";
+
+// //     let isValid=true;
+
+// //     if(nameData.ariaValueMax.trim() ===''){
+// //         nameError.innerText="Name is required";
+// //         isValid=false;
+// //     }
+// //    })
+// // })
+
+// // =========================
+// // 1. Select DOM elements
+// // =========================
+const form = document.getElementById("transaction-form");
+const amountInput = document.getElementById("amount");
+const typeInput = document.getElementById("type");
+const categoryInput = document.getElementById("category");
+const dateInput = document.getElementById("date");
+const noteInput = document.getElementById("note");
+
+const balanceEl = document.getElementById("balance");
+const monthTotalEl = document.getElementById("month-total");
+const countEl = document.getElementById("count");
+const listEl = document.getElementById("transaction-list");
+
+// // =========================
+// // 2. Data setup
+// // =========================
+let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+
+// // =========================
+// 3. Add new transaction
+// // =========================
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const transaction = {
+    id: Date.now(), // unique ID
+    amount: +amountInput.value, // convert string to number
+    type: typeInput.value,
+    category: categoryInput.value,
+    date: dateInput.value,
+    note: noteInput.value
+  };
+
+  transactions.push(transaction);
+
+  // save to localStorage
+  localStorage.setItem("transactions", JSON.stringify(transactions));
+
+  // reset form
+  form.reset();
+
+  // update UI
+  renderTransactions();
+// });
+
+// // =========================
+// 4. Render Transactions
+// // =========================
+function renderTransactions() {
+  listEl.innerHTML = ""; // clear old list
+  console.log("listEl", listEl)
+
+  transactions.forEach((tx) => {
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+      <span>${tx.date} - ${tx.category} - ₹${tx.amount} (${tx.type})</span>
+      <button onclick="deleteTransaction(${tx.id})">❌</button>
+    `;
+
+    listEl.appendChild(li);
+  });
+
+  updateOverview();
+}
+
+// // =========================
+// 5. Delete Transaction
+// // =========================
+function deleteTransaction(id) {
+  transactions = transactions.filter((tx) => tx.id !== id);
+  localStorage.setItem("transactions", JSON.stringify(transactions));
+  renderTransactions();
+}
+
+// // =========================
+// 6. Update Overview (balance + totals)
+// // =========================
+function updateOverview() {
+  let income = 0, expense = 0;
+
+  transactions.forEach((tx) => {
+    if (tx.type === "income") {
+      income += tx.amount;
+    } else {
+      expense += tx.amount;
+    }
+  });
+
+  const balance = income - expense;
+  balanceEl.textContent = `₹${balance}`;
+  monthTotalEl.textContent = `₹${expense}`;
+  countEl.textContent = transactions.length;
+}
+
+// // =========================
+// 7. Initial render on page load
+// // =========================
+renderTransactions();
+
+})
+// function validateForm()
+// {
+//    var a =document.getElementById("user_id").value;
+//    var b =document.getElementById("telephone").value;
+//    var c =document.getElementById("email").value; 
+
+//    if(a=="" ||b==""||c=="") 
+//     {
+//     alert("all fields are required");
+//    //  console.log("validation failed");  
+//     return false;       
+//    }
+//    // else if(b.length<10 || b.length>10 && RegExp=/^\d{10}*/)
+//    //    {
+//    //    alert("contact number must be 10 digits");
+//    //    return false;
+//    // }
+//    // else{
+//    //    true;
+//    // }
