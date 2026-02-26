@@ -45,11 +45,11 @@ form.addEventListener('submit', (e)=>{
    expenses.push(expense);   //push expense objects into expenses array
    console.log("expenses pushed", expenses)
    console.log("Total expenses", expenses.length);
+   renderExpenses();
    form.reset();
 
-   // funciton to render new list after chick on submit
-   expenses.push(expense);
-   renderExpenses();
+   // function to render new list after click on submit
+   // expenses.push(expense);
 })
    
 // step 4- create array once you compelted step 3, outside of submit button so that it will remember all expenses
@@ -61,11 +61,17 @@ form.addEventListener('submit', (e)=>{
    console.log("expense_list", expense_list)
 
  let renderExpenses=()=>{
+   console.log("render function running.")
    expense_list.innerHTML='';
-   expenses.forEach(()=>{
-      const new_row=document.createElement("li");
-      console.log("row from loop", new_row)
-      expense_list.appendChild(new_row);
-      });
+   expenses.forEach(exp=>{
+      console.log("display expenses",exp);
+      const expense_list=document.createElement("li");
+      console.log("expense list", expense_list)
+   })
+   // expenses.forEach(()=>{
+   //    const new_row=document.createElement("li");
+   //    console.log("row from loop", new_row)
+   //    expense_list.appendChild(new_row);
+   //    });
       console.log("expenses", expenses)
  }
