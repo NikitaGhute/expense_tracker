@@ -60,18 +60,20 @@ form.addEventListener('submit', (e)=>{
    // step 5- create lists of all expenses and render(displays)
    console.log("expense_list", expense_list)
 
- let renderExpenses=()=>{
-   console.log("render function running.")
-   expense_list.innerHTML='';
-   expenses.forEach(exp=>{
-      console.log("display expenses",exp);
-      const expense_list=document.createElement("li");
-      console.log("expense list", expense_list)
-   })
+//  let renderExpenses=()=>{
+//    console.log("render function running.")
+//    expense_list.innerHTML='';
+//    expenses.forEach(exp=>{
+//       console.log("display expenses",exp);
+//       const expense_list=document.createElement("li");
+//       console.log("expense list", expense_list)
+//       expense_list.textContent= exp.amount1 + exp.trans_type +exp.trans_category +exp.trans_date +exp.trans_note;
+//       expense_list.appendChild(expense_list)
+//    })
    // expenses.forEach(()=>{
    //    const new_row=document.createElement("li");
    //    console.log("row from loop", new_row)
    //    expense_list.appendChild(new_row);
    //    });
       console.log("expenses", expenses)
- }
+//  }
