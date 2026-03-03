@@ -60,6 +60,23 @@ form.addEventListener('submit', (e)=>{
    // step 5- create lists of all expenses and render(displays)
    console.log("expense_list", expense_list)
 
+   // render function to serve given dataon UI screen
+   const renderExpenses=()=>{
+      console.log("render function is working")
+      // clear old list so used expenses_list.innerHTML
+    expense_list.innerHTML="";
+   //  use loop for render every expense object
+       expenses.forEach(exp=>{
+        console.log("expenses foreach loop", exp)
+        const list_create=document.createElement("li");
+        console.log("list_creat:",list_create)
+        list_create.textContent=`Rs.${exp.amount1} + ${exp.trans_type} + ${exp.trans_category} + ${exp.trans_date} + ${exp.trans_note}`;
+         expense_list.appendChild(list_create);
+         list_create.textContent="Test data"
+       })
+   }
+   
+
 //  let renderExpenses=()=>{
 //    console.log("render function running.")
 //    expense_list.innerHTML='';

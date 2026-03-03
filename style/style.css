@@ -110,7 +110,7 @@ form button:hover {
 }
 
 .transactions ul {
-  list-style: none;
+  /* list-style: none; */
 }
 
 .transactions li {
