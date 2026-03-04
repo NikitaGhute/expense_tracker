@@ -34,7 +34,7 @@ form.addEventListener('submit', (e)=>{
    //access values of all fields
    // step 3- create object of every transation, because every transaction has many details, so can store in the ject form
    const expense={
-      id:Date.now,
+      id:Date.now(),
       amount1:amount1,
       trans_type:trans_type,
       trans_category:trans_category,
@@ -66,14 +66,26 @@ form.addEventListener('submit', (e)=>{
       // clear old list so used expenses_list.innerHTML
     expense_list.innerHTML="";
    //  use loop for render every expense object
+
        expenses.forEach(exp=>{
         console.log("expenses foreach loop", exp)
         const list_create=document.createElement("li");
         console.log("list_creat:",list_create)
-        list_create.textContent=`Rs.${exp.amount1} + ${exp.trans_type} + ${exp.trans_category} + ${exp.trans_date} + ${exp.trans_note}`;
+         list_create.innerHTML=`<span>Rs.${exp.amount1}  ${exp.trans_type}  ${exp.trans_category} | ${exp.trans_date} | ${exp.trans_note}</span>
+          <button onclick="deleteTransaction(${exp.id})">❌</button>
+         `;
+         list_create.classList.add("expense_item");
          expense_list.appendChild(list_create);
-         list_create.textContent="Test data"
-       })
+         // if else for style to incomr and expense
+            if(exp.trans_type==="income"){
+               list_create.classList.add("income");
+            }
+            else{
+               list_create.classList.add("expense");
+            }
+
+            // (exp.trans_type==="income") : list_creat.classList.add(income) :
+         })
    }
    
 

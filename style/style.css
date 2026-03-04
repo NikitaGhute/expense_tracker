@@ -137,3 +137,20 @@ form button:hover {
     gap: 2rem;
   }
 }
+
+.expense_item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f4f6f9;
+  padding: 10px 15px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.income {
+  border-left: 5px solid green;
+}
+.expense {
+  border-left: 5px solid red;
+}
