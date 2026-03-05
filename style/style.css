@@ -114,8 +114,8 @@ form button:hover {
 }
 
 .transactions li {
-  display: flex;
-  justify-content: space-between;
+  /* display: flex; */
+  justify-content: space-evenly;
   padding: 0.7rem;
   border-bottom: 1px solid #eee;
 }
@@ -148,9 +148,33 @@ form button:hover {
   border-radius: 6px;
   font-size: 14px;
 }
+
+.amount{
+   width:80px;
+   font-weight:bold;
+}
+
+.type{
+   width:80px;
+}
+
+.category{
+   width:100px;
+}
+
+.date{
+   width:120px;
+}
+
+.note{
+   flex:1;
+}
+
 .income {
   border-left: 5px solid green;
+  background-color: #cceecc;
 }
 .expense {
   border-left: 5px solid red;
+  background-color: #ffeeee;
 }

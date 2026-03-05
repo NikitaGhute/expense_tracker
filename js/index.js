@@ -71,9 +71,8 @@ form.addEventListener('submit', (e)=>{
         console.log("expenses foreach loop", exp)
         const list_create=document.createElement("li");
         console.log("list_creat:",list_create)
-         list_create.innerHTML=`<span>Rs.${exp.amount1}  ${exp.trans_type}  ${exp.trans_category} | ${exp.trans_date} | ${exp.trans_note}</span>
-          <button onclick="deleteTransaction(${exp.id})">❌</button>
-         `;
+         list_create.innerHTML=`&nbsp; &nbsp; <span>Rs.${exp.amount1} &nbsp; &nbsp; ${exp.trans_type} &nbsp; &nbsp; &nbsp; &nbsp; ${exp.trans_category} &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; ${exp.trans_date} &nbsp; &nbsp;&nbsp; &nbsp; ${exp.trans_note}&nbsp; &nbsp;</span>
+          <button class="delete_class">❌</button>` ;
          list_create.classList.add("expense_item");
          expense_list.appendChild(list_create);
          // if else for style to incomr and expense
@@ -83,26 +82,21 @@ form.addEventListener('submit', (e)=>{
             else{
                list_create.classList.add("expense");
             }
+            //for delete button,
+            const delete_btn= list_create.querySelector(".delete_class");
+            delete_btn.addEventListener("click", ()=>{
+               // do not delete directly, only filter and update ui
+               expenses= expenses.filter(item =>item.id !== exp.id);
+               console.log("expenses", expenses)
+               renderExpenses();
+            })
 
             // (exp.trans_type==="income") : list_creat.classList.add(income) :
          })
    }
    
 
-//  let renderExpenses=()=>{
-//    console.log("render function running.")
-//    expense_list.innerHTML='';
-//    expenses.forEach(exp=>{
-//       console.log("display expenses",exp);
-//       const expense_list=document.createElement("li");
-//       console.log("expense list", expense_list)
-//       expense_list.textContent= exp.amount1 + exp.trans_type +exp.trans_category +exp.trans_date +exp.trans_note;
-//       expense_list.appendChild(expense_list)
-//    })
-   // expenses.forEach(()=>{
-   //    const new_row=document.createElement("li");
-   //    console.log("row from loop", new_row)
-   //    expense_list.appendChild(new_row);
-   //    });
-      console.log("expenses", expenses)
-//  }
+   // delete function to call 
+   const deleteTransaction=()=>{
+      console.log("delete list",)
+   }
