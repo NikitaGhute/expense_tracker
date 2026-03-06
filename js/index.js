@@ -70,11 +70,36 @@ form.addEventListener('submit', (e)=>{
        expenses.forEach(exp=>{
         console.log("expenses foreach loop", exp)
         const list_create=document.createElement("li");
+        const transaction_row=document.createElement("div");
+        const note_write=document.createElement("div");
+
         console.log("list_creat:",list_create)
-         list_create.innerHTML=`&nbsp; &nbsp; <span>Rs.${exp.amount1} &nbsp; &nbsp; ${exp.trans_type} &nbsp; &nbsp; &nbsp; &nbsp; ${exp.trans_category} &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; ${exp.trans_date} &nbsp; &nbsp;&nbsp; &nbsp; ${exp.trans_note}&nbsp; &nbsp;</span>
-          <button class="delete_class">❌</button>` ;
-         list_create.classList.add("expense_item");
+        list_create.classList.add("expense_item");
+        transaction_row.classList.add('transaction_row');
+        note_write.classList.add("note_row");
+         // list_create.innerHTML=
+         // `
+         // <span>Rs.${exp.amount1}</span>
+         // <span> ${exp.trans_type}</span>
+         // <span> ${exp.trans_category}</span>
+         // <span>${exp.trans_date}</span>
+         // ${exp.trans_note}
+         //  <button class="delete_class">❌</button>
+         //   `;
+           transaction_row.innerHTML=`
+           <span>Rs.${exp.amount1}</span>
+           <span>${exp.trans_type}</span>
+           <span>${exp.trans_category}</span>
+           <span>${exp.trans_date}</span>
+          <button class="delete_class">❌</button>
+           `;
+           note_write.innerHTML=`${exp.trans_note}`;
+
+           list_create.appendChild(transaction_row);
+           list_create.appendChild(note_write);
+
          expense_list.appendChild(list_create);
+
          // if else for style to incomr and expense
             if(exp.trans_type==="income"){
                list_create.classList.add("income");
