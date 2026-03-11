@@ -125,3 +125,9 @@ form.addEventListener('submit', (e)=>{
    const deleteTransaction=()=>{
       console.log("delete list",)
    }
+
+
+   // update balance 
+   // fliter by category
+   // save data in localstorage
+   

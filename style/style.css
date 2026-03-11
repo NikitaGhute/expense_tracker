@@ -11,7 +11,8 @@ body {
   background: #f4f4f4;
   color: #333;
   padding: 1rem;
-  margin:14px 326px !important;
+  overflow-x: hidden !important;
+  /* margin:14px 326px !important; */
 }
 
 /* Header */
@@ -54,14 +55,15 @@ form {
   gap: 0.8rem;
 }
 .section_border {
-  max-width: max-content;
+  width: max-content;
   padding:20px 20px 40px 20px;
-  border:1px #ccc;
+  border:1px #ebe3e3;
   border-radius: 20px;
   box-shadow: 5px 8px 32px 13px #ddd;
+  margin:auto;
+  /* width:50%; */
 }
 
-form textarea,
 form input,
 form select,
 form button {
@@ -150,7 +152,7 @@ form button:hover {
 }
 
 /* Responsive - laptop view */
-@media (min-width: 1024px) {
+@media (max-width: 1024px) {
   body {
     max-width: 1000px;
     margin: auto;
@@ -167,3 +169,23 @@ form button:hover {
   }
 }
 
+@media (max-width:768px){
+
+  .container{
+    width:95%;
+    margin:auto;
+  }
+
+  form{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+}
+
+
+/* Device Type	Screen Size	Media Query
+Mobile	up to 600px	@media (max-width: 600px)
+Tablet	601px – 768px	@media (max-width: 768px)
+Small laptop	769px – 1024px	@media (max-width: 1024px)
+Desktop	above 1024px	default styles */
