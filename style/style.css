@@ -65,6 +65,7 @@ form {
 }
 
 form input,
+form textarea,
 form select,
 form button {
   padding: 0.7rem;
@@ -150,7 +151,22 @@ form button:hover {
   white-space: nowrap !important;
   display: block;
 }
-
+.lowBalance{
+  background-color: #ffe5ff;
+  padding: 3px 8px;
+  border-radius: 13px;
+  color: red;
+  margin-top: 2px;
+  margin-bottom: auto;
+}
+.maintainBal{
+  background-color: #cceecc;
+  padding: 3px 8px;
+  border-radius: 13px;
+  color: green;
+  margin-top: 2px;
+  margin-bottom: auto;
+}
 /* Responsive - laptop view */
 @media (max-width: 1024px) {
   body {

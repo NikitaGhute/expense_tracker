@@ -17,6 +17,8 @@ const countEl = document.getElementById("count");
 // get elements of transaction list generated
 const expense_list = document.getElementById("expenseList");
 
+
+
 form.addEventListener('submit', (e)=>{
    e.preventDefault();       //stop page refresh 
 // step 2-get values of all fields of form
@@ -47,6 +49,8 @@ form.addEventListener('submit', (e)=>{
    console.log("Total expenses", expenses.length);
    renderExpenses();
    form.reset();
+   totalBalance();
+   updateTransCount();
 
    // function to render new list after click on submit
    // expenses.push(expense);
@@ -77,15 +81,7 @@ form.addEventListener('submit', (e)=>{
         list_create.classList.add("expense_item");
         transaction_row.classList.add('transaction_row');
         note_write.classList.add("note_row");
-         // list_create.innerHTML=
-         // `
-         // <span>Rs.${exp.amount1}</span>
-         // <span> ${exp.trans_type}</span>
-         // <span> ${exp.trans_category}</span>
-         // <span>${exp.trans_date}</span>
-         // ${exp.trans_note}
-         //  <button class="delete_class">❌</button>
-         //   `;
+
            transaction_row.innerHTML=`
            <span>Rs.${exp.amount1}</span>
            <span>${exp.trans_type}</span>
@@ -94,13 +90,11 @@ form.addEventListener('submit', (e)=>{
           <button class="delete_class">❌</button>
            `;
            note_write.innerHTML=`${exp.trans_note}`;
-
            list_create.appendChild(transaction_row);
            list_create.appendChild(note_write);
 
          expense_list.appendChild(list_create);
-
-         // if else for style to incomr and expense
+         // if else for style to income and expense
             if(exp.trans_type==="income"){
                list_create.classList.add("income");
             }
@@ -114,20 +108,96 @@ form.addEventListener('submit', (e)=>{
                expenses= expenses.filter(item =>item.id !== exp.id);
                console.log("expenses", expenses)
                renderExpenses();
+               totalBalance();
+               updateTransCount();
             })
 
             // (exp.trans_type==="income") : list_creat.classList.add(income) :
          })
    }
    
+   // count and display total amount of expenses, balance section
+         const totalBalance=()=>{
+            console.log("balance amount", totalBalance)
+            let totalIncome=0;
+            let totalExpense=0;
+            expenses.forEach(exp => {
+                  if(exp.trans_type === "income"){
+                     console.log("total income")
+                     totalIncome= totalIncome + Number(exp.amount1);
+                  }
+                  else{
+                     totalExpense=totalExpense + Number(exp.amount1);
+                     console.log("total expense")
+                  }
+            });
+               const balance= totalIncome - totalExpense;
+               if(totalBalance <= 0){
+                  console.log("low balance");
+               }
+               else{
+                  console.log("maintained balance")
+               }
+               console.log("balance", balance);
+               balanceEl.textContent = "₹ " + balance;
+               console.log("balanceEl", balanceEl);
 
-   // delete function to call 
-   const deleteTransaction=()=>{
-      console.log("delete list",)
-   }
+               // style to balance section
+               if (balance <= 0){
+                  balanceEl.classList.add("lowBalance");
+                  balanceEl.classList.remove("maintainBal")
+               }
+               else{
+                  balanceEl.classList.add("maintainBal");
+                  balanceEl.classList.remove("lowBalance")
+               }
+         }
+
+
+         // update total amount of current month transaction
+            const currentMonth=new Date().getMonth() + 1;
+            console.log("current month", currMonth);
+
+         // updating trnsaction count
+         const updateTransCount=()=>{
+            countEl.textContent=expenses.length;
+            console.log("count of transaction", countEl)
+         }
+
+         // delete function to call 
+         const deleteTransaction=()=>{
+            console.log("delete list")
+         }
+
+
+         // const currentDate= new Date();
+         const monthNumber= new Date().getMonth() +1;  //+1 because, js start month count from 0
+         console.log("monthNumber", monthNumber)
+
+         const today = new Date();
+         const transMonth = today.getMonth();
+         const transYear = today.getFullYear();
+
+
+         let monthTotalAmount=0;
+         expenses.forEach(exp =>{
+            const monthNumber = new Date(exp.trans_date);
+            const transMonth = monthNumber.getMonth() +1;
+            const transYear= monthNumber.getFullYear();
+
+            if (transMonth === currentMonth)
+
+         })
+
 
 
    // update balance 
    // fliter by category
    // save data in localstorage
    
+
+  // below are transaction filter
+  // expenses = expenses.filter(item => item.id !== exp.id);
+  // renderExpenses();
+  // updateBalance();
+  // updateTransactionCount();
