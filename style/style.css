@@ -167,6 +167,10 @@ form button:hover {
   margin-top: 2px;
   margin-bottom: auto;
 }
+.zeroBalance{
+  color: black;
+  background-color: none;
+}
 /* Responsive - laptop view */
 @media (max-width: 1024px) {
   body {

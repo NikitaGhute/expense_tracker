@@ -50,6 +50,7 @@ form.addEventListener('submit', (e)=>{
    renderExpenses();
    form.reset();
    totalBalance();
+   updateCurrentTransacation();
    updateTransCount();
 
    // function to render new list after click on submit
@@ -67,6 +68,7 @@ form.addEventListener('submit', (e)=>{
    // render function to serve given dataon UI screen
    const renderExpenses=()=>{
       console.log("render function is working")
+
       // clear old list so used expenses_list.innerHTML
     expense_list.innerHTML="";
    //  use loop for render every expense object
@@ -109,13 +111,16 @@ form.addEventListener('submit', (e)=>{
                console.log("expenses", expenses)
                renderExpenses();
                totalBalance();
+               updateCurrentTransacation();
                updateTransCount();
             })
 
             // (exp.trans_type==="income") : list_creat.classList.add(income) :
          })
    }
-   
+
+
+
    // count and display total amount of expenses, balance section
          const totalBalance=()=>{
             console.log("balance amount", totalBalance)
@@ -143,26 +148,53 @@ form.addEventListener('submit', (e)=>{
                console.log("balanceEl", balanceEl);
 
                // style to balance section
-               if (balance <= 0){
-                  balanceEl.classList.add("lowBalance");
+               // balanceEl.classList.remove("lowBalance", "maintainBalance", "zeroBalance")
+               if (balance < 0){
                   balanceEl.classList.remove("maintainBal")
+                  balanceEl.classList.add("lowBalance");
                }
-               else{
+               else if(balance > 0){
+                  balanceEl.classList.remove("lowBalance");
                   balanceEl.classList.add("maintainBal");
-                  balanceEl.classList.remove("lowBalance")
+               }
+               else {
+                  balanceEl.classList.remove("lowBalance");
+                  balanceEl.classList.remove("maintainBal");
+                  balanceEl.classList.add("zeroBalance");
                }
          }
 
+         // updating current month expense
+         const updateCurrentTransacation=()=>{
 
-         // update total amount of current month transaction
-            const currentMonth=new Date().getMonth() + 1;
-            console.log("current month", currMonth);
+            let monthTotal = 0;
+            
+            const today = new Date();
+            const currentMonth = today.getMonth();
+            const currentYear = today.getFullYear();
+            console.log("current year", currentYear)
+            
+            expenses.forEach(exp => {
+            const transactionDate = new Date(exp.trans_date);
+            const transMonth = transactionDate.getMonth();
+            const transYear = transactionDate.getFullYear();
+            
+            if(transMonth === currentMonth && transYear === currentYear){
+               monthTotal += Number(exp.amount1);
+            }   
+         });
 
-         // updating trnsaction count
+            monthTotalEl.textContent = `Rs.${monthTotal}`;
+      }
+
+
+         // updating transaction count
          const updateTransCount=()=>{
             countEl.textContent=expenses.length;
             console.log("count of transaction", countEl)
          }
+
+         
 
          // delete function to call 
          const deleteTransaction=()=>{
@@ -170,26 +202,7 @@ form.addEventListener('submit', (e)=>{
          }
 
 
-         // const currentDate= new Date();
-         const monthNumber= new Date().getMonth() +1;  //+1 because, js start month count from 0
-         console.log("monthNumber", monthNumber)
-
-         const today = new Date();
-         const transMonth = today.getMonth();
-         const transYear = today.getFullYear();
-
-
-         let monthTotalAmount=0;
-         expenses.forEach(exp =>{
-            const monthNumber = new Date(exp.trans_date);
-            const transMonth = monthNumber.getMonth() +1;
-            const transYear= monthNumber.getFullYear();
-
-            if (transMonth === currentMonth)
-
-         })
-
-
+      
 
    // update balance 
    // fliter by category
