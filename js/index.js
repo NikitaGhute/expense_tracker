@@ -45,6 +45,9 @@ form.addEventListener('submit', (e)=>{
    }
    console.log("expense object", expense)
    expenses.push(expense);   //push expense objects into expenses array
+   
+   localStorage.setItem("expenses", JSON.stringify(expenses));
+   
    console.log("expenses pushed", expenses)
    console.log("Total expenses", expenses.length);
    renderExpenses();
@@ -59,9 +62,13 @@ form.addEventListener('submit', (e)=>{
    
 // step 4- create array once you compelted step 3, outside of submit button so that it will remember all expenses
     //and push expense object into expenses values.
-    let expenses=[];
+   //  let expenses=[];
+    let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
    console.log("expenses array", expenses)
 
+   // save data to localstorage
+
+            
    // step 5- create lists of all expenses and render(displays)
    console.log("expense_list", expense_list)
 
@@ -194,7 +201,6 @@ form.addEventListener('submit', (e)=>{
             console.log("count of transaction", countEl)
          }
 
-         
 
          // delete function to call 
          const deleteTransaction=()=>{
