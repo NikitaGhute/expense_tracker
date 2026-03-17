@@ -113,6 +113,12 @@ form button:hover {
   border-radius: 0.8rem;
 }
 
+.transaction_row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .transactions ul {
   /* list-style: none; */
 }
@@ -124,19 +130,31 @@ form button:hover {
   border-bottom: 1px solid #eee;
 }
 
-.expense_item{
+/* .expense_item{
   align-items: center;
   background-color: #f4f6f9;
+
+  display:grid;
+  grid-template-columns: 80px 80px 120px 120px 1fr 40px;
+  align-items:center;
+  gap:10px;
+}  */
+
+.expense_item {
+  display: flex;
+  flex-direction: column;  /* IMPORTANT */
+  gap: 6px;
   padding: 10px 15px;
   margin-bottom: 8px;
   margin-right: 20px;
   border-radius: 6px;
   font-size: 14px;
-  display:grid;
-  grid-template-columns: 80px 80px 120px 120px 1fr 40px;
-  align-items:center;
-  gap:10px;
-} 
+}
+.transaction_row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .income {
   border-left: 5px solid green;
   background-color: #cceecc;
@@ -145,11 +163,12 @@ form button:hover {
   border-left: 5px solid red;
   background-color: #ffeeee;
 }
-.note{
+.note_row{
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
   display: block;
+  font-size: 13px;
 }
 .lowBalance{
   background-color: #ffe5ff;

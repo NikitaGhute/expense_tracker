@@ -91,14 +91,19 @@ form.addEventListener('submit', (e)=>{
         transaction_row.classList.add('transaction_row');
         note_write.classList.add("note_row");
 
-           transaction_row.innerHTML=`
+           list_create.innerHTML=`
+         <div class="transaction_row">
            <span>Rs.${exp.amount1}</span>
            <span>${exp.trans_type}</span>
            <span>${exp.trans_category}</span>
            <span>${exp.trans_date}</span>
           <button class="delete_class">❌</button>
+          </div>
            `;
-           note_write.innerHTML=`${exp.trans_note}`;
+           note_write.innerHTML=`
+            <div class="note_row">
+            <i>Note: ${exp.trans_note}</i>
+           </div>`;
            list_create.appendChild(transaction_row);
            list_create.appendChild(note_write);
 
@@ -208,15 +213,5 @@ form.addEventListener('submit', (e)=>{
          }
 
 
-      
-
-   // update balance 
-   // fliter by category
-   // save data in localstorage
-   
-
-  // below are transaction filter
-  // expenses = expenses.filter(item => item.id !== exp.id);
-  // renderExpenses();
-  // updateBalance();
-  // updateTransactionCount();
+         // remove localstorage items
+         localStorage.removeItem("expenses");
